@@ -25,10 +25,8 @@ body {
 
 .grid {
     border: solid 1px lightgrey;
-    transition: all 20s;
 }
 
-.grid:hover {
-    background-color: red;
-    transition: all 0.1s;
+.touched{
+    background-color: black;
 }
