@@ -1,6 +1,7 @@
 const gridContainer = document.querySelector('.grid-container');
 const resetButton = document.querySelector('.set-grid');
 let gridCell;
+let clicked = false;
 
 function initialGrid () {
     setGridCss(50);
@@ -35,8 +36,7 @@ function makeGrid () {
         alert('Please enter a number between 2 and 100!');
     } else {
         generateGrid(gridSize);
-        gridCell = Array.from(document.querySelectorAll('.grid'));
-        gridCell.forEach(cell => cell.addEventListener('mouseenter', changeCellColour));
+        makeEventListeners();
     }
 }
 
@@ -48,16 +48,18 @@ function setGridCss (size) {
     gridContainer.style.cssText = styles;
 }
 
-function changeCellColour () {
-    this.classList.add('touched');
+function changeCellColour (e) {
+    if (e.buttons == 1 || e.buttons == 3) {
+        this.classList.add('touched');
+    }
 }
 
+
 function makeEventListeners () {
+    gridCell = Array.from(document.querySelectorAll('.grid'));
     resetButton.addEventListener('click', makeGrid);
     gridCell.forEach(cell => cell.addEventListener('mouseenter', changeCellColour));
 }
 
 initialGrid();
-gridCell = Array.from(document.querySelectorAll('.grid'));
-
 makeEventListeners();
