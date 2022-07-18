@@ -1,10 +1,10 @@
 const gridContainer = document.querySelector('.grid-container');
 const resetButton = document.querySelector('.set-grid');
-let gridCell
+let gridCell;
 
 function initialGrid () {
-    setGridCss(8);
-    for (let i = 0; i < 64; i++) {
+    setGridCss(50);
+    for (let i = 0; i < 2500; i++) {
         const gridItem = document.createElement('div');
         gridItem.classList.add('grid');
         gridContainer.appendChild(gridItem);
@@ -36,7 +36,7 @@ function makeGrid () {
     } else {
         generateGrid(gridSize);
         gridCell = Array.from(document.querySelectorAll('.grid'));
-        console.log(gridCell);
+        gridCell.forEach(cell => cell.addEventListener('mouseenter', changeCellColour));
     }
 }
 
@@ -52,8 +52,12 @@ function changeCellColour () {
     this.classList.add('touched');
 }
 
+function makeEventListeners () {
+    resetButton.addEventListener('click', makeGrid);
+    gridCell.forEach(cell => cell.addEventListener('mouseenter', changeCellColour));
+}
+
 initialGrid();
 gridCell = Array.from(document.querySelectorAll('.grid'));
 
-resetButton.addEventListener('click', makeGrid);
-gridCell.forEach(cell => cell.addEventListener('mouseover', changeCellColour));
+makeEventListeners();
