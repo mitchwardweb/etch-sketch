@@ -1,7 +1,7 @@
 const gridContainer = document.querySelector('.grid-container');
 const resetButton = document.querySelector('.set-grid');
+const clearGridButton = document.querySelector('.clear-grid');
 let gridCell;
-let clicked = false;
 
 function initialGrid () {
     setGridCss(50);
@@ -54,11 +54,15 @@ function changeCellColour (e) {
     }
 }
 
+function clearGrid (){
+    gridCell.forEach(cell => cell.classList.remove('touched'));
+}
 
 function makeEventListeners () {
     gridCell = Array.from(document.querySelectorAll('.grid'));
     resetButton.addEventListener('click', makeGrid);
     gridCell.forEach(cell => cell.addEventListener('mouseenter', changeCellColour));
+    clearGridButton.addEventListener('click', clearGrid);
 }
 
 initialGrid();
