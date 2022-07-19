@@ -16,16 +16,50 @@ body {
     padding: 20px;
 }
 
+h1, h2, .buttons {
+    font-family: 'Press Start 2P';
+}
+
+h2 {
+    margin-bottom: 40px;
+}
+
 .grid-container {
     height: 800px;
     width: 800px;
     display: grid;
     justify-items: stretch;
+    border: solid 4px lightgrey;
 }
 
-.grid {
-    border: solid 1px lightgrey;
+.button-container {
+    display: flex;
+    gap: 10px;
 }
+
+.buttons {
+    padding: 20px 30px;
+    border: none;
+    color: white;
+    border: 4px solid black;
+    background-color: red;
+    box-shadow: inset -4px -4px 0px 0px rgb(0.0, 0.0, 0.0, 0.3);
+}
+
+.draw {
+    background-color: green;
+}
+
+.buttons :active {
+    box-shadow: inset 4px 4px 0px 0px rgb(0.0, 0.0, 0.0, 0.3);
+}
+
+.active {
+    box-shadow: inset 4px 4px 0px 0px rgb(0.0, 0.0, 0.0, 0.3);
+}
+
+/* .grid {
+} */
 
 .touched{
     background-color: black;

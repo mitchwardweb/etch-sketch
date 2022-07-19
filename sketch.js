@@ -1,7 +1,10 @@
 const gridContainer = document.querySelector('.grid-container');
 const resetButton = document.querySelector('.set-grid');
 const clearGridButton = document.querySelector('.clear-grid');
+const drawButton = document.querySelector('.draw');
+const eraserButton = document.querySelector('.erase');
 let gridCell;
+let modeState = 'draw';
 
 function initialGrid () {
     setGridCss(50);
@@ -50,7 +53,11 @@ function setGridCss (size) {
 
 function changeCellColour (e) {
     if (e.buttons == 1 || e.buttons == 3) {
-        this.classList.add('touched');
+        if(modeState === 'draw'){
+            this.classList.add('touched');
+        } else if (modeState === 'eraser') {
+            this.classList.remove('touched');
+        }
     }
 }
 
@@ -58,11 +65,26 @@ function clearGrid (){
     gridCell.forEach(cell => cell.classList.remove('touched'));
 }
 
+function modeSelector (e){
+    modeState = e.target.innerText.toLowerCase();
+    if (modeState === 'draw'){
+        drawButton.classList.add('active');
+        eraserButton.classList.remove('active');
+    } else if (modeState === 'eraser') {
+        eraserButton.classList.add('active');
+        drawButton.classList.remove('active');
+    }
+    console.log(modeState);
+}
+
 function makeEventListeners () {
     gridCell = Array.from(document.querySelectorAll('.grid'));
     resetButton.addEventListener('click', makeGrid);
+    gridCell.forEach(cell => cell.addEventListener('mousedown', changeCellColour));
     gridCell.forEach(cell => cell.addEventListener('mouseenter', changeCellColour));
     clearGridButton.addEventListener('click', clearGrid);
+    drawButton.addEventListener('click', modeSelector);
+    eraserButton.addEventListener('click', modeSelector);
 }
 
 initialGrid();
